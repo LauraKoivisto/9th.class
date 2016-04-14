@@ -12,10 +12,10 @@ function login($user, $pass){
 
   $pass = hash ("sha512", $pass);
   $mysql = new mysqli("localhost", $GLOBALS["db_username"], $GLOBALS["db_password"], "webpr2016_laukoi");
-  $stmt= $mysql->prepare("SELECT id FROM users WHERE username=? and password=?");
+  $stmt= $mysql->prepare("SELECT id, name FROM users WHERE username=? and password=?");
 echo $mysql->error;
 $stmt->bind_param("ss", $user,$pass);
-$stmt->bind_result($id);
+$stmt->bind_result($id, $name);
 $stmt->execute();
 
 //get the data
@@ -25,6 +25,7 @@ if($stmt->fetch()){
 //create session variables
 //redirect user
 $_SESSION["user_id"] = $id;
+$_SESSION["name"]= $name;
 $_SESSION["username"]= $user;
 
 header("Location: restrict.php");
