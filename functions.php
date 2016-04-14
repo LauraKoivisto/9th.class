@@ -36,20 +36,20 @@ header("Location: restrict.php");
 
 }
 
-function signup($user, $pass) {
+function signup($user, $pass, $name) {
 
-  //has the password
+  //hash the password
   $pass = hash ("sha512", $pass);
 
 
   //GLOBALS - access outside variable in function
   $mysql = new mysqli("localhost", $GLOBALS["db_username"], $GLOBALS["db_password"], "webpr2016_laukoi");
 
-$stmt = $mysql->prepare("INSERT INTO users(username, password) VALUES (?, ?) ");
+$stmt = $mysql->prepare("INSERT INTO users(username, password, name) VALUES (?, ?, ?) ");
 
 echo $mysql->error;
 
-$stmt-> bind_param("ss",$user, $pass);
+$stmt-> bind_param("sss",$user, $pass, $name);
 
 if($stmt->execute()){
   echo "user saved successfully";
@@ -59,6 +59,7 @@ echo $stmt->error;
 }
 
 }
+
 
 /*$name = "Laura";
 

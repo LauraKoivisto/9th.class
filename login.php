@@ -37,18 +37,18 @@ echo "both fields are required";
 
   //signup
 
-  echo "signing up...";
+  echo "Signing up...";
 
 //the fields are empty
-if(!empty($_POST["username"]) && !empty($_POST["password"])) {
+if(!empty($_POST["username"]) && !empty($_POST["password"])&& !empty($_POST["firstname"])) {
 
 //save to DB
 
-signup($_POST["username"], $_POST["password"]);
+signup($_POST["username"], $_POST["password"], $_POST["firstname"]);
 
 }else{
 
-echo "both fields are required";
+echo "All fields are required";
 
 }
 
@@ -78,9 +78,13 @@ echo "both fields are required";
 
 
 <form method ="POST">
-<input type="text" placeholder="username" name="username">
-<input type="password" placeholder="password" name="password">
-
-
+  <input type="text" placeholder="First name" name="firstname">
+  <br>
+    <input type="text" placeholder="Favourite animal" name="Favourite animal"> <br>
+<input type="text" placeholder="New username" name="username"> <br>
+<input type="password" placeholder="New password" name="password">
+<br>
 <input type="submit" name="signup" value="Sign up">
+
+
 </form>
