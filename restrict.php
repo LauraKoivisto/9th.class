@@ -21,10 +21,10 @@ header("Location: login.php");
 //someone clicked button add
 if(isset($_GET["add_new_interest"])){
 if(!empty($_GET["new_interest"])){
-saveInterest($_GET[new_interest]);
+saveInterest($_GET["new_interest"]);
 }else{
 
-  echo "you left the field empty";
+  echo "You left the field empty";
 }
 
 

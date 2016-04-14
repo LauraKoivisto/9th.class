@@ -46,22 +46,39 @@ function signup($user, $pass, $name) {
   //GLOBALS - access outside variable in function
   $mysql = new mysqli("localhost", $GLOBALS["db_username"], $GLOBALS["db_password"], "webpr2016_laukoi");
 
-$stmt = $mysql->prepare("INSERT INTO users(username, password, name) VALUES (?, ?, ?) ");
 
+
+
+  $stmt = $mysql->prepare("INSERT INTO users(username, password, name) VALUES (?, ?, ?) ");
+
+  echo $mysql->error;
+
+  $stmt-> bind_param("sss",$user, $pass, $name);
+
+  if($stmt->execute()){
+    echo "user saved successfully";
+  }else{
+  echo $stmt->error;
+
+  }
+
+}
+
+function saveInterest($interest){
+
+    $mysql = new mysqli("localhost", $GLOBALS["db_username"], $GLOBALS["db_password"], "webpr2016_laukoi");
+      $stmt= $mysql->prepare("INSERT INTO interests (name) VALUE (?)");
 echo $mysql->error;
-
-$stmt-> bind_param("sss",$user, $pass, $name);
-
+$stmt->bind_param("s", $interest);
 if($stmt->execute()){
-  echo "user saved successfully";
+  echo "interest saved";
 }else{
-echo $stmt->error;
 
+  echo $stmt->error;
 }
 
+
 }
-
-
 /*$name = "Laura";
 
 hello($name, "thursday", 7);
